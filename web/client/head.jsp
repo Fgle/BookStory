@@ -26,7 +26,7 @@
     <c:if test="${user==null }">
         <form action="${pageContext.request.contextPath }/client/LoginServlet" method="post">
             用户名：<input type="text" name="username" style="width:60px;">
-            密码：<input type="password" name="password" style="width:60px;">
+            密&emsp;码：<input type="password" name="password" style="width:60px;">
             <input type="submit" value="登陆">
             <input type="button" value="注册" onclick="javascript:window.parent.body.location.href='${pageContext.request.contextPath }/client/register.jsp'">
         </form>

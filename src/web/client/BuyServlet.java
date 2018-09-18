@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.Book;
 import domain.Cart;
+import domain.User;
 import service.impl.BusinessServiceImpl;
 
 public class BuyServlet extends HttpServlet {
@@ -20,6 +21,13 @@ public class BuyServlet extends HttpServlet {
             BusinessServiceImpl service = new BusinessServiceImpl();
             Book book = service.findBook(bookid);
             Cart cart = (Cart) request.getSession().getAttribute("cart");
+            User user = (User) request.getSession().getAttribute("user");
+            if(user == null){
+                request.setAttribute("message","请登录！");
+                request.setAttribute("path","/client/IndexServlet?method=getAll");
+                request.getRequestDispatcher("/message.jsp").forward(request, response);
+                return;
+            }
             if(cart == null){
                 cart = new Cart();
                 request.getSession().setAttribute("cart", cart);
@@ -28,7 +36,7 @@ public class BuyServlet extends HttpServlet {
             request.getRequestDispatcher("/client/listcart.jsp").forward(request, response);
         }catch(Exception e){
             e.printStackTrace();
-            request.setAttribute("message", "����ʧ��");
+            request.setAttribute("message", "购买失败");
             request.getRequestDispatcher("/message.jsp").forward(request, response);
         }
     }
