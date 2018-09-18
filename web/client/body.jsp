@@ -7,6 +7,7 @@
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -25,17 +26,28 @@
             </c:forEach>
         </ul>
     </div>
-    <div id="bookandpage" style="float:left; margin-left:30px;">
+    <div id="bookandpage" style="float:left; margin-left:40px;">
         <div id="books">
             <c:forEach var="book" items="${page.list }">
-                <div id="book" style="height:150; margin-top:20px;">
+                <div id="book" style="height:150px; margin-top:20px;">
                     <div id="image" style="float:left;">
                         <img src="${pageContext.request.contextPath }/images/${book.image}" height=150 width=100>
                     </div>
                     <div id="bookinfo" style="float:left; text-align:left;">
                         <ul>
                             <li>${book.name }</li>
-                            <li>作者：${book.author }</li>
+                            <li>作者：
+                                <c:set var="count" value="1"/>
+                                <c:forTokens items="${book.author}" delims='/' var="ba">
+                                    <c:if test="${count%2 == 1}" var="flag">
+                                        <c:out value="${ba}"/>
+                                    </c:if>
+                                    <c:if test="${not flag}">
+                                        <c:out value="/ ${ba}"/><br>
+                                    </c:if>
+                                    <c:set var="count" value="${count+1}"/>
+                                </c:forTokens>
+                            </li>
                             <li>售价：${book.price }</li>
                             <li>
                                 <a href="${pageContext.request.contextPath }/client/BuyServlet?bookid=${book.id}">加入购物车</a>

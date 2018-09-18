@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
         try{
             QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
             String sql = "select * from user where id=?";
-            return (User)runner.query(sql, id, new BeanHandler(User.class));
+            return (User)runner.query(sql, new BeanHandler(User.class), id);
         } catch(Exception e){
             throw new RuntimeException(e);
         }
@@ -44,7 +44,7 @@ public class UserDaoImpl implements UserDao {
             QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
             String sql = "select * from user where username=? and password=?";
             Object params[] = {username, password};
-            return (User)runner.query(sql, params, new BeanHandler(User.class));
+            return (User)runner.query(sql, new BeanHandler(User.class), params);
         } catch(Exception e){
             throw new RuntimeException(e);
         }
