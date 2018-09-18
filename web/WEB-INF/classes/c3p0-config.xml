@@ -3,8 +3,8 @@
 <c3p0-config>
 
     <default-config>
-        <property name="driverClass">com.mysql.jdbc.Driver</property>
-        <property name="jdbcUrl">jdbc:mariadb://localhost:3306/bookstore</property>
+        <property name="driverClass">org.mariadb.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/bookstore</property>
         <property name="user">root</property>
         <property name="password">214641</property>
 
@@ -17,11 +17,11 @@
         <property name="maxStatementsPerConnection">5</property> <!-- he's important, but there's only one of him -->
     </default-config>
 
-    <named-config name="mysql">
-        <property name="driverClass">com.mysql.jdbc.Driver</property>
+    <named-config name="mariadb">
+        <property name="driverClass">org.mariadb.jdbc.Driver</property>
         <property name="jdbcUrl">jdbc:mysql://localhost:3306/bookstore</property>
         <property name="user">root</property>
-        <property name="password">root</property>
+        <property name="password">214641</property>
 
         <property name="acquireIncrement">5</property>
         <property name="initialPoolSize">10</property>

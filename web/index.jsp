@@ -14,8 +14,8 @@
 </head>
 
 <frameset rows="17%,*">
-  <frame src="${pageContext.request.contextPath }/client/head.jsp" name="head">
-  <frame src="${pageContext.request.contextPath }/client/IndexServlet?method=getAll" name="body">
+  <frame src="${pageContext.request.contextPath}/client/head.jsp" name="head">
+  <frame src="${pageContext.request.contextPath}/client/IndexServlet?method=getAll" name="body">
 </frameset>
 
 </html>
