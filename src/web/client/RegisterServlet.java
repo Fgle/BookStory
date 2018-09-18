@@ -33,8 +33,11 @@ public class RegisterServlet extends HttpServlet {
             user.setUsername(username);
 
             BusinessServiceImpl service = new BusinessServiceImpl();
+            User usersession = (User) request.getSession().getAttribute("user");
             service.registerUser(user);
-            request.getSession().setAttribute("user","user");
+            if(usersession == null) {
+                request.getSession().setAttribute("user",user);
+            }
             request.getRequestDispatcher("/client/head.jsp").forward(request, response);//这里要跳转到首页，并且显示欢迎您，，，待修改
 
         }catch(Exception e){
