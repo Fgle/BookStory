@@ -40,6 +40,7 @@ public class RegisterServlet extends HttpServlet {
         }catch(Exception e){
             e.printStackTrace();
             request.setAttribute("message", "注册失败");
+            request.setAttribute("path","/client/head.jsp");
             request.getRequestDispatcher("/message.jsp").forward(request, response);
         }
     }

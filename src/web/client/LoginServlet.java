@@ -19,12 +19,14 @@ public class LoginServlet extends HttpServlet {
         BusinessServiceImpl service = new BusinessServiceImpl();
         if(username.isEmpty() || password.isEmpty() ) {
             request.setAttribute("message","请输入用户名和密码！");
+            request.setAttribute("path","/client/head.jsp");
             request.getRequestDispatcher("/message.jsp").forward(request, response);
             return;
         }
         User user = service.userLogin(username, password);
         if(user == null){
             request.setAttribute("message", "用户名和密码不对！");
+            request.setAttribute("path","/client/head.jsp");
             request.getRequestDispatcher("/message.jsp").forward(request, response);
             return;
         }
