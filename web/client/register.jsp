@@ -15,14 +15,14 @@
 </head>
 
 <body style="text-align:center;">
-<form action="${pageContext.request.contextPath }/client/RegisterServlet" method="post">
+<form action="${pageContext.request.contextPath }/client/RegisterServlet" method="post" target="head">
     用户名：<input type="text" name="username"><br/>
     密&emsp;码：<input type="password" name="password"><br/>
     电&emsp;话：<input type="text" name="phone"><br/>
     手&emsp;机：<input type="text" name="cellphone"><br/>
     邮&emsp;箱：<input type="text" name="email"><br/>
     住&emsp;址：<input type="text" name="address"><br/>
-    <input type="submit" value="注册">
+    <input type="submit" value="注册" onclick="javascript:window.location.href='${pageContext.request.contextPath }/client/IndexServlet?method=getAll'">
 </form>
 </body>
 </html>
