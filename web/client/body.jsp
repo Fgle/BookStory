@@ -36,7 +36,7 @@
                     <div id="bookinfo" style="float:left; text-align:left;">
                         <ul>
                             <li>${book.name }</li>
-                            <li>作者：
+                            <li>作者：<!-- 每行两名作者，以防作者过多影响页面显示 -->
                                 <c:set var="count" value="1"/>
                                 <c:forTokens items="${book.author}" delims='/' var="ba">
                                     <c:if test="${count%2 == 1}" var="flag">
