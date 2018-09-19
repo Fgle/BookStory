@@ -17,9 +17,9 @@ public class ListOrderServlet extends HttpServlet {
             throws ServletException, IOException {
         String state = request.getParameter("state");
         BusinessServiceImpl service = new BusinessServiceImpl();
-        List<Order> orders = service.listOrder(state);//������Ҫ��ø��û����ж�����Ϣ������ֻ��δ������(state==false)���ں�̨������δ�������ѷ�������ǰ̨Ҫ������һ��
+        List<Order> orders = service.listOrder(state);
         request.setAttribute("orders", orders);
-        request.getRequestDispatcher("/manager/listorder.jsp").forward(request, response);
+        request.getRequestDispatcher("/manage/listorder.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

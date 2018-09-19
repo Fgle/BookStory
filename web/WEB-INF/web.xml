@@ -93,11 +93,11 @@
 
     <servlet-mapping>
         <servlet-name>CategoryServlet</servlet-name>
-        <url-pattern>/manager/CategoryServlet</url-pattern>
+        <url-pattern>/manage/CategoryServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookServlet</servlet-name>
-        <url-pattern>/manager/BookServlet</url-pattern>
+        <url-pattern>/manage/BookServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
@@ -125,15 +125,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListOrderServlet</servlet-name>
-        <url-pattern>/manager/ListOrderServlet</url-pattern>
+        <url-pattern>/manage/ListOrderServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderDetailServlet</servlet-name>
-        <url-pattern>/manager/OrderDetailServlet</url-pattern>
+        <url-pattern>/manage/OrderDetailServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ConfirmOrderServlet</servlet-name>
-        <url-pattern>/manager/ConfirmOrderServlet</url-pattern>
+        <url-pattern>/manage/ConfirmOrderServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ClientListOrderServlet</servlet-name>

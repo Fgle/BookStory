@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<form action="${pageContext.request.contextPath }/manager/BookServlet?method=add" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath }/manage/BookServlet?method=add" method="post" enctype="multipart/form-data">
     <table frame="border" width="50%">
         <tr>
             <td>图书名称</td>

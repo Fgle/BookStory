@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<form action="${pageContext.request.contextPath }/manager/CategoryServlet?method=add" method="post">
+<form action="${pageContext.request.contextPath }/manage/CategoryServlet?method=add" method="post">
     分类名称：<input type="text" name="name"><br/><br/>
     分类描述：<textarea rows="5" cols="40" name="description"></textarea>
     <input type="submit" value="添加">

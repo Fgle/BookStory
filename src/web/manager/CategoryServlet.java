@@ -40,7 +40,7 @@ public class CategoryServlet extends HttpServlet {
         BusinessServiceImpl service = new BusinessServiceImpl();
         List<Category> CategoryList = service.getAllCategory();
         request.setAttribute("categories", CategoryList);
-        request.getRequestDispatcher("/manager/listcategory.jsp").forward(request, response);
+        request.getRequestDispatcher("/manage/listcategory.jsp").forward(request, response);
     }
 
     private void find(HttpServletRequest request, HttpServletResponse response) {

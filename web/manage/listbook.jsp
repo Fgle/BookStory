@@ -44,7 +44,7 @@
 <br>
 当前第[${page.pagenum }]页 &nbsp;&nbsp;
 <c:forEach var="pagenum" begin="${page.startpage }" end="${page.endpage }">
-    [<a href="${pageContext.request.contextPath }/manager/BookServlet?method=list&pagenum=${pagenum}">${pagenum }</a>]
+    [<a href="${pageContext.request.contextPath }/manage/BookServlet?method=list&pagenum=${pagenum}">${pagenum }</a>]
 </c:forEach>
 &nbsp;&nbsp;
 总共[${page.totalpage }]页，共[${page.totalrecord }]条记录

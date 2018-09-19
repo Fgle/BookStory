@@ -18,7 +18,7 @@ public class OrderDetailServlet extends HttpServlet {
         BusinessServiceImpl service = new BusinessServiceImpl();
         Order order = service.findOrder(orderid);
         request.setAttribute("order", order);
-        request.getRequestDispatcher("/manager/orderdetail.jsp").forward(request, response);
+        request.getRequestDispatcher("/manage/orderdetail.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

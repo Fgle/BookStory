@@ -32,7 +32,7 @@
             <td>${order.price }</td>
             <td>${order.state==true?'已发货':'未发货' }</td>
             <td>
-                <a href="${pageContext.request.contextPath }/manager/OrderDetailServlet?orderid=${order.id}">查看明细</a>
+                <a href="${pageContext.request.contextPath }/manage/OrderDetailServlet?orderid=${order.id}">查看明细</a>
                 <a href="#">删除</a>
             </td>
         </tr>
