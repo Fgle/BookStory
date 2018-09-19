@@ -34,6 +34,7 @@ public class OrderServlet extends HttpServlet {
         }catch(Exception e){
             e.printStackTrace();
             request.setAttribute("message", "订单生成失败");
+            request.setAttribute("path","/client/ListCartServlet");
             request.getRequestDispatcher("/message.jsp").forward(request, response);
         }
     }
