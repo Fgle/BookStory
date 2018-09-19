@@ -10,4 +10,9 @@ public interface CartDao {
 
     Cart find(String id);
 
+    void removeOne(Cart cart, Book book);
+
+    void delete(Cart cart, Book book);
+
+    void clear(Cart cart);
 }

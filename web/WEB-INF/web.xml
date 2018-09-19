@@ -82,6 +82,14 @@
         <servlet-name>ClientListCartServlet</servlet-name>
         <servlet-class>web.client.ListCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartBookServlet</servlet-name>
+        <servlet-class>web.client.CartBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DelOrderServlet</servlet-name>
+        <servlet-class>web.client.DelOrderServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>CategoryServlet</servlet-name>
@@ -138,5 +146,13 @@
     <servlet-mapping>
         <servlet-name>ClientListCartServlet</servlet-name>
         <url-pattern>/client/ListCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartBookServlet</servlet-name>
+        <url-pattern>/client/CartBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DelOrderServlet</servlet-name>
+        <url-pattern>/client/DelOrderServlet</url-pattern>
     </servlet-mapping>
 </web-app>

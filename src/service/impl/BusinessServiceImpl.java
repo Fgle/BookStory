@@ -80,7 +80,7 @@ public class BusinessServiceImpl implements BusinessService {
         page.setList(list);
         return page;
     }
-
+     //购物车
     public void buyBook(Cart cart, Book book, User user) {
         if(cart.getId() == null) {
             cart.setId(WebUtils.makeID());
@@ -96,6 +96,18 @@ public class BusinessServiceImpl implements BusinessService {
 
     public Cart findCart(String user_id) {
         return cartDao.find(user_id);
+    }
+
+    public void clearCart(Cart cart) {
+        cartDao.clear(cart);
+    }
+
+    public void removeOneBookInCart(Cart cart, Book book) {
+        cartDao.removeOne(cart, book);
+    }
+
+    public void deleteBooksInCart(Cart cart, Book book) {
+        cartDao.delete(cart, book);
     }
 
     //注册用户
@@ -162,5 +174,8 @@ public class BusinessServiceImpl implements BusinessService {
     public List<Order> clientListOrder(String userid) {
         return orderDao.getAllOrder(userid);
     }
-
+    //删除一个订单
+    public void delOrder(Order order) {
+        orderDao.delete(order);
+    }
 }

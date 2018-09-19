@@ -167,4 +167,18 @@ public class OrderDaoImpl implements OrderDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void delete(Order order) {
+       try {
+           QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+           String sql = "delete from orderitem where order_id=?";
+           runner.update(sql, order.getId());
+           sql = "delete from orders where id=?";
+           runner.update(sql, order.getId());
+       } catch(Exception e){
+           e.printStackTrace();
+           throw new RuntimeException(e);
+       }
+    }
 }

@@ -17,7 +17,6 @@ public class IndexServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String method = request.getParameter("method");
-        System.out.printf(method);
         if(method.equalsIgnoreCase("getAll")){
             getAll(request, response);
         }else if(method.equalsIgnoreCase("listBookWithCategory")){

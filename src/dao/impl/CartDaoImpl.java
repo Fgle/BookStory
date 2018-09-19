@@ -1,10 +1,7 @@
 package dao.impl;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.ArrayList;
+import java.util.*;
 
 import domain.Book;
 import org.apache.commons.dbutils.QueryRunner;
@@ -66,6 +63,8 @@ public class CartDaoImpl implements CartDao{
             //1.找出购物车的基本信息
             String sql = "select * from cart where user_id=?";
             Cart cart = (Cart) runner.query(sql, new BeanHandler(Cart.class), id);
+            if(cart == null)
+                return null;
             //2.找出购物车中所有的图书项
             sql = "select * from cartitem where cart_id=?";
             List<CartItem> cartItems = (List<CartItem>) runner.query(sql, new BeanListHandler(CartItem.class), cart.getId());
@@ -88,4 +87,75 @@ public class CartDaoImpl implements CartDao{
         }
     }
 
+    @Override
+    public void removeOne(Cart cart, Book book) {
+        try {
+            QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+            String sql = null;
+            Object params[] = null;
+            String itemID= cart.getMap().get(book.getId()).getId();
+
+            cart.removeOne(book);
+            CartItem cartItem = cart.getMap().get(book.getId());
+
+            if(cartItem == null) {
+                sql = "delete from cartitem where id=?";
+                runner.update(sql, itemID);
+            }
+            else {
+                sql = "update cartitem set quantity=?,price=? where id=?";
+                params = new Object[] { cartItem.getQuantity(), cartItem.getPrice(), cartItem.getId()};
+                runner.update(sql, params);
+            }
+            if (cart.getMap().isEmpty()) {
+                sql = "delete from cart where id=?";
+                runner.update(sql, cart.getId());
+            }
+            else {
+                sql = "update cart set price=? where id=?";
+                params = new Object[]{cart.getPrice(), cart.getId()};
+                runner.update(sql, params);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void delete(Cart cart, Book book) {
+        try {
+            QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+            CartItem cartItem = cart.getMap().get(book.getId());
+            cart.delete(book);
+            String sql = "delete from cartitem where id=?";
+            runner.update(sql, cartItem.getId());
+            if (cart.getMap().isEmpty()) {
+                sql = "delete from cart where id=?";
+                runner.update(sql, cart.getId());
+            }
+            else {
+                sql = "update cart set price=? where id=?";
+                Object params[] = {cart.getPrice(), cart.getId()};
+                runner.update(sql, params);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void clear(Cart cart) {
+        try {
+          QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+          String sql = "delete from cartitem where cart_id=?";
+          runner.update(sql, cart.getId());
+          sql = "delete from cart where id = ?";
+          runner.update(sql, cart.getId());
+        } catch(Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }

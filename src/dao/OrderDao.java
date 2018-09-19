@@ -18,4 +18,6 @@ public interface OrderDao {
 
     List<Order> getAllOrder(String userid);
 
+    void delete (Order order);
+
 }

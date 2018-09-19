@@ -28,6 +28,22 @@ public class Cart {
         }
     }
 
+    public void removeOne(Book book) {
+        CartItem item = map.get(book.getId());
+        if(item.getQuantity() == 1) {
+            map.remove(book.getId());
+        }
+        else {
+            item.setQuantity(item.getQuantity() - 1);
+        }
+    }
+
+    public void delete(Book book) {
+        CartItem item = map.get(book.getId());
+        if(item != null)
+            map.remove(book.getId());
+    }
+
     public String getId() {
         return id;
     }

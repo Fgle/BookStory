@@ -47,7 +47,9 @@
                 <td>${me.value.quantity }</td>
                 <td>${me.value.price }</td>
                 <td>
-                    <a href="#">删除</a>
+                    <a href="${pageContext.request.contextPath}/client/CartBookServlet?method=add&book_id=${me.value.book.id}}">+</a>
+                    <a href="${pageContext.request.contextPath}/client/CartBookServlet?method=rm&book_id=${me.value.book.id}">-</a>
+                    <a href="${pageContext.request.contextPath}/client/CartBookServlet?method=del&book_id=${me.value.book.id}">删除</a>
                 </td>
             </tr>
         </c:forEach>

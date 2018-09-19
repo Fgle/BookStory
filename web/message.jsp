@@ -11,7 +11,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <meta http-equiv="refresh" content="3;URL=${pageContext.request.contextPath}${path}">
+    <meta http-equiv="refresh" content="1;URL=${pageContext.request.contextPath}${path}">
     <title>My JSP 'message.jsp' starting page</title>
 </head>
 
