@@ -19,7 +19,7 @@
 <br/>
 <div>
     <a href="${pageContext.request.contextPath }/client/IndexServlet?method=getAll" target="body">首页</a>
-    <a href="${pageContext.request.contextPath }/client/listcart.jsp" target="body">查看购物车</a>
+    <a href="${pageContext.request.contextPath }/client/ListCartServlet" target="body">查看购物车</a>
     <a href="${pageContext.request.contextPath }/client/ClientListOrderServlet?userid=${user.id}" target="body">查看订单</a>
 </div>
 <div style="float:right;">

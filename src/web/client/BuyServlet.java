@@ -32,7 +32,7 @@ public class BuyServlet extends HttpServlet {
                 cart = new Cart();
                 request.getSession().setAttribute("cart", cart);
             }
-            service.buyBook(cart, book);
+            service.buyBook(cart, book, user);
             response.sendRedirect("/client/IndexServlet?method=getAll");
             return;
         }catch(Exception e){

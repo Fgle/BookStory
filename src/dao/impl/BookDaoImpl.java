@@ -15,7 +15,7 @@ import domain.Book;
 public class BookDaoImpl implements BookDao {
 
     /* (non-Javadoc)
-     * @see dao.impl.BookDao#add(domain.Book)
+     * @see dao.BookDao#add(domain.Book)
      */
     public void add(Book book){
         try {
@@ -30,7 +30,7 @@ public class BookDaoImpl implements BookDao {
     }
 
     /* (non-Javadoc)
-     * @see dao.impl.BookDao#find(java.lang.String)
+     * @see dao.BookDao#find(java.lang.String)
      */
     public Book find(String id){
         try {

@@ -1,5 +1,6 @@
 package dao.impl;
 
+import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -69,10 +70,10 @@ public class OrderDaoImpl implements OrderDao {
             QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
             //1.找出订单的基本信息
             String sql = "select * from orders where id=?";
-            Order order = (Order) runner.query(sql, id, new BeanHandler(Order.class));
+            Order order = (Order) runner.query(sql, new BeanHandler(Order.class), id);
             //2.找出订单中所有的订单项
             sql = "select * from orderitem where order_id=?";
-            List<OrderItem> list = (List<OrderItem>) runner.query(sql, id, new BeanListHandler(OrderItem.class));
+            List<OrderItem> list = (List<OrderItem>) runner.query(sql, new BeanListHandler(OrderItem.class), id);
             for(OrderItem item : list){
                 sql = "select book.* from orderitem,book where orderitem.id=? and orderitem.book_id=book.id";
                 Book book = (Book) runner.query(sql, new BeanHandler(Book.class), item.getId());

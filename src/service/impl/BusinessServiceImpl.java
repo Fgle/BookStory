@@ -4,12 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import dao.*;
 import utils.DaoFactory;
 import utils.WebUtils;
-import dao.BookDao;
-import dao.CategoryDao;
-import dao.OrderDao;
-import dao.UserDao;
 import domain.Book;
 import domain.Cart;
 import domain.CartItem;
@@ -25,6 +22,7 @@ public class BusinessServiceImpl implements BusinessService {
     private BookDao bookDao = DaoFactory.getInstance().createDao("dao.impl.BookDaoImpl", BookDao.class);
     private UserDao userDao = DaoFactory.getInstance().createDao("dao.impl.UserDaoImpl", UserDao.class);
     private OrderDao orderDao = DaoFactory.getInstance().createDao("dao.impl.OrderDaoImpl", OrderDao.class);
+    private CartDao cartDao = DaoFactory.getInstance().createDao("dao.impl.CartDaoImpl",CartDao.class);
     /* (non-Javadoc)
      * @see service.impl.BusinessService#addCategory(domain.Category)
      */
@@ -83,8 +81,21 @@ public class BusinessServiceImpl implements BusinessService {
         return page;
     }
 
-    public void buyBook(Cart cart, Book book) {
+    public void buyBook(Cart cart, Book book, User user) {
+        if(cart.getId() == null) {
+            cart.setId(WebUtils.makeID());
+            cart.setUser(user);
+        }
+        if(cart.getUser() == null) {
+            cart.setUser(user);
+        }
         cart.add(book);
+
+        cartDao.add(cart);
+    }
+
+    public Cart findCart(String user_id) {
+        return cartDao.find(user_id);
     }
 
     //注册用户
@@ -151,4 +162,5 @@ public class BusinessServiceImpl implements BusinessService {
     public List<Order> clientListOrder(String userid) {
         return orderDao.getAllOrder(userid);
     }
+
 }

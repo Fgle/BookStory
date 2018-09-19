@@ -1,10 +1,13 @@
 package domain;
 
 public class CartItem {
+    private String id;
     private Book book;
     private int quantity;
     private double price;
 
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
     public Book getBook() {
         return book;
     }
