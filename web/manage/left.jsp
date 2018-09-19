@@ -48,8 +48,8 @@
     <li>
         <a href="#" onclick="test('menu3')">订单管理
             <div id="menu3" class="menu">
-                <a href="${pageContext.request.contextPath}/manage/ListOrderServlet?state=false" target="right">未发货订单</a><br/>
-                <a href="${pageContext.request.contextPath}/manage/ListOrderServlet?state=true" target="right">已发货订单</a>
+                <a href="${pageContext.request.contextPath}/manage/ManagerOrderServlet?method=list&state=false" target="right">未发货订单</a><br/>
+                <a href="${pageContext.request.contextPath}/manage/ManagerOrderServlet?method=list&state=true" target="right">已发货订单</a>
             </div>
         </a>
     </li>

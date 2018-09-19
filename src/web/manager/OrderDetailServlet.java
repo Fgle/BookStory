@@ -14,7 +14,7 @@ public class OrderDetailServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String orderid = request.getParameter("orderid");
+        String orderid = request.getParameter("orderID");
         BusinessServiceImpl service = new BusinessServiceImpl();
         Order order = service.findOrder(orderid);
         request.setAttribute("order", order);
