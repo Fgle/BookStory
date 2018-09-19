@@ -89,6 +89,7 @@ public class BusinessServiceImpl implements BusinessService {
         if(cart.getUser() == null) {
             cart.setUser(user);
         }
+        System.out.printf(book.getId());
         cart.add(book);
 
         cartDao.add(cart);

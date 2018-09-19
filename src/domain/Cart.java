@@ -30,6 +30,8 @@ public class Cart {
 
     public void removeOne(Book book) {
         CartItem item = map.get(book.getId());
+        if(item == null)
+            return;
         if(item.getQuantity() == 1) {
             map.remove(book.getId());
         }

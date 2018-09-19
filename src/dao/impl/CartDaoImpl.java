@@ -21,24 +21,25 @@ public class CartDaoImpl implements CartDao{
         try {
             QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
             //将用户的购物车信息保存到cart表
-            String sql = "select * from cart where user_id=?";
-            Cart oldcart = (Cart) runner.query(sql, new BeanHandler(Cart.class), cart.getUser().getId());
+            String sql = "select * from cart where id=?";
+            Cart oldcart = (Cart) runner.query(sql, new BeanHandler(Cart.class), cart.getId());
             Object params[] = null;
             if(oldcart == null) {
                 sql = "insert into cart(id,price,user_id) values(?,?,?)";
                 params = new Object[] {cart.getId(), cart.getPrice(),cart.getUser().getId() };
             }
             else {
-                sql = "update cart set price=? where user_id=?";
-                params = new Object[] { cart.getPrice(), cart.getUser().getId() };
+                sql = "update cart set price=? where id=?";
+                params = new Object[] { cart.getPrice(), cart.getId() };
             }
 
             runner.update(sql, params);
             //将cart中的图书项保存到cartitem
             List<CartItem> cartItems = new ArrayList<CartItem>(cart.getMap().values());
             for (CartItem cartItem : cartItems) {
-                sql = "select * from cartitem where book_id=?";
-                CartItem oldItem = (CartItem) runner.query(sql, new BeanHandler(CartItem.class), cartItem.getBook().getId());
+                sql = "select * from cartitem where id=?";
+                System.out.printf(cartItem.getId());
+                CartItem oldItem = (CartItem) runner.query(sql, new BeanHandler(CartItem.class), cartItem.getId());
                 if (oldItem == null) {
                     sql = "insert into cartitem(id,quantity,price,cart_id,book_id) values(?,?,?,?,?)";
                     params = new Object[] {cartItem.getId(), cartItem.getQuantity(), cartItem.getPrice(), cart.getId(), cartItem.getBook().getId()};
