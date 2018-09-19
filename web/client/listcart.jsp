@@ -5,8 +5,8 @@
   Time: 上午7:43
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -31,7 +31,18 @@
         <c:forEach var="me" items="${cart.map }">
             <tr>
                 <td>${me.value.book.name }</td>
-                <td>${me.value.book.author }</td>
+                <td>
+                    <c:set var="count" value="1"/>
+                    <c:forTokens items="${me.value.book.author}" delims='/' var="ba">
+                        <c:if test="${count%2 == 1}" var="flag">
+                            <c:out value="${ba}"/>
+                        </c:if>
+                        <c:if test="${not flag}">
+                            <c:out value="/ ${ba}"/><br>
+                        </c:if>
+                        <c:set var="count" value="${count+1}"/>
+                    </c:forTokens>
+                </td>
                 <td>${me.value.book.price }</td>
                 <td>${me.value.quantity }</td>
                 <td>${me.value.price }</td>

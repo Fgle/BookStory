@@ -37,6 +37,20 @@ public class UserDaoImpl implements UserDao {
     }
 
     /* (non-Javadoc)
+     * @see dao.impl.UserDao#findByName(java.lang.String)
+     */
+    @Override
+    public User findByName(String username) {
+        try {
+            QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+            String sql = "select * from user where name=?";
+            return (User)runner.query(sql, new BeanHandler(User.class), username);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /* (non-Javadoc)
      * @see dao.impl.UserDao#find(java.lang.String, java.lang.String)
      */
     public User find(String username, String password){

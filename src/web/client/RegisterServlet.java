@@ -34,11 +34,19 @@ public class RegisterServlet extends HttpServlet {
 
             BusinessServiceImpl service = new BusinessServiceImpl();
             User usersession = (User) request.getSession().getAttribute("user");
-            service.registerUser(user);
+            User isExistedUser = service.findUserByName(username);
+
+            if(isExistedUser != null) {
+                request.setAttribute("message", "用户以存在！");
+                request.setAttribute("path", "/client/register.jsp");
+                request.getRequestDispatcher("/message").forward(request, response);
+                return;
+            }
             if(usersession == null) {
                 request.getSession().setAttribute("user",user);
             }
-            request.getRequestDispatcher("/client/head.jsp").forward(request, response);//这里要跳转到首页，并且显示欢迎您，，，待修改
+            service.registerUser(user);
+            request.getRequestDispatcher("/client/head.jsp").forward(request, response);
 
         }catch(Exception e){
             e.printStackTrace();

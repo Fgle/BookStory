@@ -95,6 +95,7 @@ public class BusinessServiceImpl implements BusinessService {
     public User findUser(String id){
         return userDao.find(id);
     }
+    public User findUserByName(String username) { return userDao.find(username); }
 
     public User userLogin(String username, String password){
         return userDao.find(username, password);

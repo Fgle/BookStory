@@ -24,7 +24,7 @@ public class BuyServlet extends HttpServlet {
             User user = (User) request.getSession().getAttribute("user");
             if(user == null){
                 request.setAttribute("message","请登录！");
-                request.setAttribute("path","/client/IndexServlet?method=getAll");
+                request.setAttribute("path","/client/IndexServlet");
                 request.getRequestDispatcher("/message.jsp").forward(request, response);
                 return;
             }
@@ -33,7 +33,8 @@ public class BuyServlet extends HttpServlet {
                 request.getSession().setAttribute("cart", cart);
             }
             service.buyBook(cart, book);
-            request.getRequestDispatcher("/client/listcart.jsp").forward(request, response);
+            response.sendRedirect("/client/IndexServlet?method=getAll");
+            return;
         }catch(Exception e){
             e.printStackTrace();
             request.setAttribute("message", "购买失败");
