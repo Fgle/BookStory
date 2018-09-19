@@ -14,10 +14,10 @@
 </head>
 
 <frameset rows="15%,*">
-    <frame src="${pageContext.request.contextPath }/manager/head.jsp" name="head">
+    <frame src="${pageContext.request.contextPath}/manager/head.jsp" name="head">
     <frameset cols="15%,*">
-        <frame src="${pageContext.request.contextPath }/manager/left.jsp" name="left">
-        <frame src="${pageContext.request.contextPath }/manager/right.jsp" name="right">
+        <frame src="${pageContext.request.contextPath}/manager/left.jsp" name="left">
+        <frame src="${pageContext.request.contextPath}/manager/right.jsp" name="right">
     </frameset>
 </frameset>
 </html>
