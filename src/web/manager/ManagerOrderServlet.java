@@ -19,6 +19,8 @@ public class ManagerOrderServlet extends HttpServlet{
             list(request, response);
         if("del".equalsIgnoreCase(method))
             delete(request, response);
+        if("detail".equalsIgnoreCase(method))
+            detail(request, response);
 
     }
 
@@ -45,6 +47,14 @@ public class ManagerOrderServlet extends HttpServlet{
         return;
     }
 
+    public void detail(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+        String orderid = request.getParameter("orderID");
+        BusinessServiceImpl service = new BusinessServiceImpl();
+        Order order = service.findOrder(orderid);
+        request.setAttribute("order", order);
+        request.getRequestDispatcher("/manage/orderdetail.jsp").forward(request, response);
+    }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

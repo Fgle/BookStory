@@ -58,10 +58,7 @@
         <servlet-name>LoginOutServlet</servlet-name>
         <servlet-class>web.client.LoginOutServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>OrderDetailServlet</servlet-name>
-        <servlet-class>web.manager.OrderDetailServlet</servlet-class>
-    </servlet>
+
     <servlet>
         <servlet-name>ConfirmOrderServlet</servlet-name>
         <servlet-class>web.manager.ConfirmOrderServlet</servlet-class>
@@ -130,10 +127,6 @@
     <servlet-mapping>
         <servlet-name>LoginOutServlet</servlet-name>
         <url-pattern>/client/LoginOutServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderDetailServlet</servlet-name>
-        <url-pattern>/manage/OrderDetailServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ConfirmOrderServlet</servlet-name>
