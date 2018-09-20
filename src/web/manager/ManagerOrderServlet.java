@@ -21,7 +21,8 @@ public class ManagerOrderServlet extends HttpServlet{
             delete(request, response);
         if("detail".equalsIgnoreCase(method))
             detail(request, response);
-
+        if("confirm".equalsIgnoreCase(method))
+            confirm(request, response);
     }
 
     public void list(HttpServletRequest request, HttpServletResponse response)
@@ -54,6 +55,21 @@ public class ManagerOrderServlet extends HttpServlet{
         Order order = service.findOrder(orderid);
         request.setAttribute("order", order);
         request.getRequestDispatcher("/manage/orderdetail.jsp").forward(request, response);
+    }
+
+    public void confirm(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+        try{
+            String orderid = request.getParameter("orderid");
+            BusinessServiceImpl service = new BusinessServiceImpl();
+            service.confirmOrder(orderid);
+            request.setAttribute("message", "订单已置为发货状态，请及时配送");
+            request.getRequestDispatcher("/message.jsp").forward(request, response);
+        } catch(Exception e){
+            e.printStackTrace();
+            request.setAttribute("message", "确认失败");
+            request.getRequestDispatcher("/message.jsp").forward(request, response);
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

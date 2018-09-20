@@ -55,7 +55,12 @@
         <td>${order.user.email }</td>
     </tr>
 </table>
-<a href="${pageContext.request.contextPath }/manage/ConfirmOrderServlet?orderid=${order.id}">确认发货</a>
+<c:if test="${order.state == true}">
+    <a href="${pageContext.request.contextPath}/manage/ManagerOrderServlet?method=del&orderID=${order.id}&state=${order.state}">确认配送</a>
+</c:if>
+<c:if test="${order.state == false}">
+    <a href="${pageContext.request.contextPath }/manage/ManagerOrderServlet?method=confirm&orderid=${order.id}">确认发货</a>
+</c:if>
 </body>
 </html>
 

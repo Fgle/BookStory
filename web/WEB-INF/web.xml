@@ -60,10 +60,6 @@
     </servlet>
 
     <servlet>
-        <servlet-name>ConfirmOrderServlet</servlet-name>
-        <servlet-class>web.manager.ConfirmOrderServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ClientListOrderServlet</servlet-name>
         <servlet-class>web.client.ClientListOrderServlet</servlet-class>
     </servlet>
@@ -127,10 +123,6 @@
     <servlet-mapping>
         <servlet-name>LoginOutServlet</servlet-name>
         <url-pattern>/client/LoginOutServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ConfirmOrderServlet</servlet-name>
-        <url-pattern>/manage/ConfirmOrderServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ClientListOrderServlet</servlet-name>
