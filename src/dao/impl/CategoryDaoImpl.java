@@ -37,7 +37,7 @@ public class CategoryDaoImpl implements CategoryDao {
         try {
             QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
             String sql = "select * from category where id=?";
-            return (Category)runner.query(sql, id, new BeanHandler(Category.class));
+            return (Category)runner.query(sql, new BeanHandler(Category.class), id);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -59,4 +59,33 @@ public class CategoryDaoImpl implements CategoryDao {
         }
     }
 
+    @Override
+    public void update(Category category) {
+        try {
+            QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+            String sql = "update category set name=?,description=? where id=?";
+            Object params[] = { category.getName(), category.getDescription(), category.getId()};
+            runner.update(sql, params);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void delete(String id) {
+        try {
+            QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+            String sql = "select id from category where name=?";
+            String unclassifiedID = (String) runner.query(sql, new BeanHandler(String.class), "未分类");
+            sql = "update book set category_id=? where category_id=?";
+            Object params[] = {unclassifiedID, id};
+            runner.update(sql, params);
+            sql = "delete from category where id=?";
+            runner.update(sql, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }

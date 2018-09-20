@@ -30,8 +30,8 @@
     <li>
         <a href="#" onclick="test('menu1')">分类管理
             <div id="menu1" class="menu">
-                <a href="${pageContext.request.contextPath}/manage/addcategory.jsp" target="right">添加分类</a><br/>
-                <a href="${pageContext.request.contextPath}/manage/CategoryServlet?method=listall" target="right">查看分类</a>
+                <a href="${pageContext.request.contextPath}/manage/categoryInfo.jsp" target="right">添加分类</a><br/>
+                <a href="${pageContext.request.contextPath}/manage/CategoryServlet?method=listAll" target="right">查看分类</a>
             </div>
         </a>
     </li>

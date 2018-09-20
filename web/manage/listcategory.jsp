@@ -28,7 +28,7 @@
             <td>${c.description }</td>
             <td>
                 <a href="#">删除</a>
-                <a href="#">修改</a>
+                <a href="${pageContext.request.contextPath}/manage/CategoryServlet?method=reviseUI&categoryID=${c.id}">修改</a>
             </td>
         </tr>
     </c:forEach>

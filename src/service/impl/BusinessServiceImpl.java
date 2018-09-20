@@ -44,6 +44,14 @@ public class BusinessServiceImpl implements BusinessService {
         return categoryDao.getAll();
     }
 
+    public void updateCategory(Category category) {
+        categoryDao.update(category);
+    }
+
+    public void delCategory(String id) {
+        categoryDao.delete(id);
+    }
+
     //添加书
     public Boolean addBook(Book book){
         Book oldBook = bookDao.findByName(book.getName());

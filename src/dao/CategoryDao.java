@@ -12,4 +12,9 @@ public interface CategoryDao {
 
     public abstract List<Category> getAll();
 
+    public abstract void update(Category category);
+
+    public abstract void delete(String id);
+
+
 }
