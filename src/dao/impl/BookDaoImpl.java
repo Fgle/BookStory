@@ -55,6 +55,19 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
+    @Override
+    public void update(Book book) {
+        try {
+            QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+            String sql = "update book set name=?,author=?,price=?,image=?,description=?,category_id=? where id=?";
+            Object params[] = { book.getName(), book.getAuthor(), book.getPrice(), book.getImage(), book.getDescription(), book.getCategory_id(), book.getId() };
+            runner.update(sql, params);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Book> getPageData(int startindex, int pagesize){
         try {
             QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());

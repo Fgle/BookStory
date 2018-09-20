@@ -55,6 +55,10 @@ public class BusinessServiceImpl implements BusinessService {
             return false;
 
     }
+    //更新图书信息
+    public void updateBookInfo(Book book){
+        bookDao.update(book);
+    }
     //删除书
     public void delBook(Book book) { bookDao.delete(book); }
     public void delBookByID(String id) { bookDao.deleteById(id); }

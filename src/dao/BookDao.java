@@ -12,6 +12,8 @@ public interface BookDao {
 
     Book findByName(String name);
 
+    void update(Book book);//通过bookID更新图书信息
+
     public List<Book> getPageData(int startindex, int pagesize);
 
     public int getTotalRecord();

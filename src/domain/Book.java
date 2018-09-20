@@ -65,4 +65,15 @@ public class Book {
     public void setCategory_id(String category_id) {
         this.category_id = category_id;
     }
+
+    @Override
+    public String toString() {
+        return  "BookID: " + this.getId() + "\n" +
+                "Name: " + this.getName() + "\n" +
+                "Author: " + this.getAuthor() + "\n" +
+                "Price: " + this.getPrice() + "\n" +
+                "Image: " + this.getImage() + "\n" +
+                "Description: " + this.getDescription() + "\n" +
+                "CategoryID: " + this.getCategory_id() + "\n";
+    }
 }

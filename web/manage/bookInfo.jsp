@@ -21,7 +21,8 @@
 </head>
 
 <body>
-<form action="${pageContext.request.contextPath }/manage/BookServlet?method=${method}" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath }/manage/BookServlet?method=${method}&bookID=${title ? 0 : book.id}"
+      method="post" enctype="multipart/form-data">
     <table frame="border" width="50%">
         <tr>
             <td>图书名称</td>
@@ -30,7 +31,7 @@
                     <input type="text" name="name">
                 </c:if>
                 <c:if test="${not title}">
-                    <input type="text" name="name" placeholder="${book.name}">
+                    <input type="text" name="name" value="${book.name}">
                 </c:if>
             </td>
         </tr>
@@ -41,7 +42,7 @@
                     <input type="text" name="author">
                 </c:if>
                 <c:if test="${not title}">
-                    <input type="text" name="author" placeholder="${book.author}">
+                    <input type="text" name="author" value="${book.author}">
                 </c:if>
             </td>
         </tr>
@@ -52,7 +53,7 @@
                     <input type="text" name="price">
                 </c:if>
                 <c:if test="${not title}">
-                    <input type="text" name="price" placeholder="${book.price}">
+                    <input type="text" name="price" value="${book.price}">
                 </c:if>
             </td>
         </tr>
@@ -65,7 +66,13 @@
         <tr>
             <td>图书描述</td>
             <td>
-                <textarea rows="5" cols="40" name="description"></textarea>
+                <c:if test="${title}">
+                    <textarea rows="5" cols="40" name="description" ></textarea>
+                </c:if>
+                <c:if test="${not title}">
+                    <textarea rows="5" cols="40" name="description" >${book.description}</textarea>
+                </c:if>
+
             </td>
         </tr>
         <tr>

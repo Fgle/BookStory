@@ -40,6 +40,10 @@ public class BookServlet extends HttpServlet {
         }
         if("delete".equalsIgnoreCase(method))
             delete(request, response);
+        if("reviseUI".equalsIgnoreCase(method))
+            reviseUI(request, response);
+        if("revise".equalsIgnoreCase(method))
+            revise(request, response);
     }
 
     private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,6 +52,15 @@ public class BookServlet extends HttpServlet {
         Page page = service.getBookPageData(pagenum);
         request.setAttribute("page", page);
         request.getRequestDispatcher("/manage/listbook.jsp").forward(request, response);
+    }
+
+    private void addUI(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        BusinessServiceImpl service = new BusinessServiceImpl();
+        List<Category> category = service.getAllCategory();
+        request.setAttribute("categories", category);
+        request.getRequestDispatcher("/manage/bookInfo.jsp").forward(request,
+                response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response)
@@ -83,7 +96,28 @@ public class BookServlet extends HttpServlet {
 
     private void revise(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
-        String bookID = request.getParameter("bookID");
+        try {
+            String bookID = request.getParameter("bookID");
+            BusinessServiceImpl service = new BusinessServiceImpl();
+            Book oldbook = service.findBook(bookID);
+            Book book = doupLoad(request);
+            book.setId(bookID);
+            if(book.getImage() == null)
+                book.setImage(oldbook.getImage());
+            System.out.printf(book.toString());
+
+            service.updateBookInfo(book);
+            request.setAttribute("message", "更新成功");
+            request.setAttribute("path","/manage/BookServlet?method=list");
+            request.getRequestDispatcher("/message.jsp").forward(request, response);
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("path","/manage/BookServlet?method=list");
+            request.setAttribute("message", "更新失败");
+            request.getRequestDispatcher("/message.jsp").forward(request, response);
+            return;
+        }
 
     }
 
@@ -93,8 +127,7 @@ public class BookServlet extends HttpServlet {
         BusinessServiceImpl service = new BusinessServiceImpl();
         Book book = service.findBook(bookID);
         request.setAttribute("book", book);
-        request.getRequestDispatcher("/manage/addBook.jsp").forward(request,
-                response);
+        addUI(request, response);
     }
 
     private Book doupLoad(HttpServletRequest request) {
@@ -104,7 +137,6 @@ public class BookServlet extends HttpServlet {
             DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
             List<FileItem> list = upload.parseRequest(request);
-            System.out.printf(list.toString()+ "\n");
             for(FileItem item : list){
                 if(item.isFormField()){
                     String name = item.getFieldName();
@@ -112,6 +144,8 @@ public class BookServlet extends HttpServlet {
                     BeanUtils.setProperty(book, name, value);
                 }else{
                     String filename = item.getName();
+                    if(filename.isEmpty())
+                        continue;
                     String savefilename = makeFileName(filename);//得到保存在硬盘的文件名
                     String savepath= this.getServletContext().getRealPath("/images");
                     InputStream in = item.getInputStream();
@@ -138,15 +172,6 @@ public class BookServlet extends HttpServlet {
     public String makeFileName(String filename){
         String ext = filename.substring(filename.lastIndexOf(".") + 1);//lastIndexOf("\\.")这样写不行
         return UUID.randomUUID().toString() + "." + ext;
-    }
-
-    private void addUI(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        BusinessServiceImpl service = new BusinessServiceImpl();
-        List<Category> category = service.getAllCategory();
-        request.setAttribute("categories", category);
-        request.getRequestDispatcher("/manage/addBook.jsp").forward(request,
-                response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
