@@ -93,4 +93,28 @@ public class BookDaoImpl implements BookDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void delete(Book book) {
+        try {
+            QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+            String sql = "delete from book where id=?";
+            runner.update(sql,book.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw  new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteById(String id) {
+        try {
+            QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+            String sql = "delete from book where id=?";
+            runner.update(sql,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw  new RuntimeException(e);
+        }
+    }
 }

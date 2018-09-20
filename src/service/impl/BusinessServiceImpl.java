@@ -48,7 +48,9 @@ public class BusinessServiceImpl implements BusinessService {
     public void addBook(Book book){
         bookDao.add(book);
     }
-
+    //删除书
+    public void delBook(Book book) { bookDao.delete(book); }
+    public void delBookByID(String id) { bookDao.deleteById(id); }
     //获得书
     public Book findBook(String id){
         return bookDao.find(id);

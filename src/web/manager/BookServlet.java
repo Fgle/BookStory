@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import domain.Book;
 import domain.Category;
 import domain.Page;
+import org.omg.PortableInterceptor.INACTIVE;
 import service.impl.BusinessServiceImpl;
 import utils.WebUtils;
 
@@ -28,15 +29,17 @@ public class BookServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String method = request.getParameter("method");
-        if (method.equalsIgnoreCase("addUI")) {
+        if ("addUI".equalsIgnoreCase(method)) {
             addUI(request, response);
         }
-        if (method.equalsIgnoreCase("add")) {
+        if ("add".equalsIgnoreCase(method)) {
             add(request, response);
         }
-        if(method.equalsIgnoreCase("list")){
+        if("list".equalsIgnoreCase(method)){
             list(request, response);
         }
+        if("delete".equalsIgnoreCase(method))
+            delete(request, response);
     }
 
     private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,19 +50,35 @@ public class BookServlet extends HttpServlet {
         request.getRequestDispatcher("/manage/listbook.jsp").forward(request, response);
     }
 
-    private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void add(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
         try {
             Book book = doupLoad(request);
             BusinessServiceImpl service = new BusinessServiceImpl();
             book.setId(WebUtils.makeID());
             service.addBook(book);
             request.setAttribute("message", "添加成功");
+            request.setAttribute("path","/manage/BookServlet?method=list");
+            request.getRequestDispatcher("/message.jsp").forward(request, response);
+            return;
         } catch (Exception e) {
             e.printStackTrace();
+            request.setAttribute("path","/manage/BookServlet?method=list");
             request.setAttribute("message", "添加失败");
+            request.getRequestDispatcher("/message.jsp").forward(request, response);
+            return;
         }
-        request.getRequestDispatcher("/message.jsp").forward(request, response);
     }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+        String bookID = request.getParameter("bookID");
+        BusinessServiceImpl service = new BusinessServiceImpl();
+        service.delBookByID(bookID);
+        list(request, response);
+    }
+
+
 
     private Book doupLoad(HttpServletRequest request) {
         //把上传的图片保存到images目录中，并把request中的请求参数封装到Book中
@@ -68,6 +87,7 @@ public class BookServlet extends HttpServlet {
             DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
             List<FileItem> list = upload.parseRequest(request);
+            System.out.printf(list.toString()+ "\n");
             for(FileItem item : list){
                 if(item.isFormField()){
                     String name = item.getFieldName();
@@ -78,7 +98,7 @@ public class BookServlet extends HttpServlet {
                     String savefilename = makeFileName(filename);//得到保存在硬盘的文件名
                     String savepath= this.getServletContext().getRealPath("/images");
                     InputStream in = item.getInputStream();
-                    FileOutputStream out = new FileOutputStream(savepath + "\\" + savefilename);
+                    FileOutputStream out = new FileOutputStream(savepath + "//" + savefilename);
                     int len = 0;
                     byte buffer[] = new byte[1024];
                     while((len = in.read(buffer)) > 0){

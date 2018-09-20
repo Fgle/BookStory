@@ -36,7 +36,7 @@
             <td>${book.description }</td>
             <td>
                 <a href="#">修改</a>
-                <a href="#">删除</a>
+                <a href="${pageContext.request.contextPath }/manage/BookServlet?method=delete&bookID=${book.id}">删除</a>
             </td>
         </tr>
     </c:forEach>

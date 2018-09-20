@@ -18,4 +18,8 @@ public interface BookDao {
 
     public int getTotalRecord(String category_id);
 
+    public void delete(Book book);
+
+    public void deleteById(String id);
+
 }

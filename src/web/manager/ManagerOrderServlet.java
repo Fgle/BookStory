@@ -25,7 +25,7 @@ public class ManagerOrderServlet extends HttpServlet{
             confirm(request, response);
     }
 
-    public void list(HttpServletRequest request, HttpServletResponse response)
+    private void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         String state = request.getParameter("state");
         BusinessServiceImpl service = new BusinessServiceImpl();
@@ -35,7 +35,7 @@ public class ManagerOrderServlet extends HttpServlet{
         return;
     }
 
-    public void delete(HttpServletRequest request, HttpServletResponse response)
+    private void delete(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
         String orderID = request.getParameter("orderID");
         String state = request.getParameter("state");
@@ -48,7 +48,7 @@ public class ManagerOrderServlet extends HttpServlet{
         return;
     }
 
-    public void detail(HttpServletRequest request, HttpServletResponse response)
+    private void detail(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
         String orderid = request.getParameter("orderID");
         BusinessServiceImpl service = new BusinessServiceImpl();
@@ -57,7 +57,7 @@ public class ManagerOrderServlet extends HttpServlet{
         request.getRequestDispatcher("/manage/orderdetail.jsp").forward(request, response);
     }
 
-    public void confirm(HttpServletRequest request, HttpServletResponse response)
+    private void confirm(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
         try{
             String orderid = request.getParameter("orderid");
