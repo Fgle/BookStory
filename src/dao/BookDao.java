@@ -8,7 +8,9 @@ public interface BookDao {
 
     void add(Book book);
 
-    Book find(String id);
+    Book findByID(String id);
+
+    Book findByName(String name);
 
     public List<Book> getPageData(int startindex, int pagesize);
 

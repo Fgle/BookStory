@@ -56,8 +56,11 @@ public class BookServlet extends HttpServlet {
             Book book = doupLoad(request);
             BusinessServiceImpl service = new BusinessServiceImpl();
             book.setId(WebUtils.makeID());
-            service.addBook(book);
-            request.setAttribute("message", "添加成功");
+            Boolean flag = service.addBook(book);
+            if(flag == true)
+                request.setAttribute("message", "添加成功");
+            else
+                request.setAttribute("message", "图书以存在");
             request.setAttribute("path","/manage/BookServlet?method=list");
             request.getRequestDispatcher("/message.jsp").forward(request, response);
             return;
@@ -78,7 +81,21 @@ public class BookServlet extends HttpServlet {
         list(request, response);
     }
 
+    private void revise(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+        String bookID = request.getParameter("bookID");
 
+    }
+
+    private void reviseUI(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+        String bookID = request.getParameter("bookID");
+        BusinessServiceImpl service = new BusinessServiceImpl();
+        Book book = service.findBook(bookID);
+        request.setAttribute("book", book);
+        request.getRequestDispatcher("/manage/addBook.jsp").forward(request,
+                response);
+    }
 
     private Book doupLoad(HttpServletRequest request) {
         //把上传的图片保存到images目录中，并把request中的请求参数封装到Book中

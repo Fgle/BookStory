@@ -45,15 +45,22 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     //添加书
-    public void addBook(Book book){
-        bookDao.add(book);
+    public Boolean addBook(Book book){
+        Book oldBook = bookDao.findByName(book.getName());
+        if(oldBook == null) {
+            bookDao.add(book);
+            return true;
+        }
+        else
+            return false;
+
     }
     //删除书
     public void delBook(Book book) { bookDao.delete(book); }
     public void delBookByID(String id) { bookDao.deleteById(id); }
     //获得书
     public Book findBook(String id){
-        return bookDao.find(id);
+        return bookDao.findByID(id);
     }
 
     //获得分页数据

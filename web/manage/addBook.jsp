@@ -10,28 +10,50 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>添加图书</title>
+    <c:if test="${book == null}" var="title">
+        <title>添加图书</title>
+        <c:set var="method" value="add"/>
+    </c:if>
+    <c:if test="${not title}">
+        <title>修改图书</title>
+        <c:set var="method" value="revise"/>
+    </c:if>
 </head>
 
 <body>
-<form action="${pageContext.request.contextPath }/manage/BookServlet?method=add" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath }/manage/BookServlet?method=${method}" method="post" enctype="multipart/form-data">
     <table frame="border" width="50%">
         <tr>
             <td>图书名称</td>
             <td>
-                <input type="text" name="name">
+                <c:if test="${title}">
+                    <input type="text" name="name">
+                </c:if>
+                <c:if test="${not title}">
+                    <input type="text" name="name" placeholder="${book.name}">
+                </c:if>
             </td>
         </tr>
         <tr>
             <td>作者</td>
             <td>
-                <input type="text" name="author">
+                <c:if test="${title}">
+                    <input type="text" name="author">
+                </c:if>
+                <c:if test="${not title}">
+                    <input type="text" name="author" placeholder="${book.author}">
+                </c:if>
             </td>
         </tr>
         <tr>
             <td>售价</td>
             <td>
-                <input type="text" name="price">
+                <c:if test="${title}">
+                    <input type="text" name="price">
+                </c:if>
+                <c:if test="${not title}">
+                    <input type="text" name="price" placeholder="${book.price}">
+                </c:if>
             </td>
         </tr>
         <tr>
@@ -49,11 +71,17 @@
         <tr>
             <td>所属分类</td>
             <td>
-                <select name="category_id">
+                <select name="category_id" id="category">
                     <c:forEach var="c" items="${categories }">
                         <option value="${c.id }">${c.name }</option>
                     </c:forEach>
                 </select>
+                <c:if test="${not title}">
+                    <script>
+                        document.getElementById("category").value = "${book.category_id}";
+                    </script>
+                </c:if>
+
             </td>
         </tr>
         <tr>

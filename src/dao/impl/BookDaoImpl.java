@@ -32,11 +32,23 @@ public class BookDaoImpl implements BookDao {
     /* (non-Javadoc)
      * @see dao.BookDao#find(java.lang.String)
      */
-    public Book find(String id){
+    public Book findByID(String id){
         try {
             QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
             String sql = "select * from book where id=?";
             return (Book)runner.query(sql, new BeanHandler(Book.class), id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Book findByName(String name) {
+        try {
+            QueryRunner runner = new QueryRunner(JdbcUtils.getDataSource());
+            String sql = "select * from book where name=?";
+            return (Book)runner.query(sql, new BeanHandler(Book.class), name);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
