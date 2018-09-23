@@ -59,7 +59,7 @@
             <td colspan="5">${cart.price }</td>
         </tr>
     </table>
-    <a href="${pageContext.request.contextPath }/client/OrderServlet">购买</a>
+    <a href="${pageContext.request.contextPath }/client/CartServlet?method=order">购买</a>
 </c:if>
 </body>
 </html>

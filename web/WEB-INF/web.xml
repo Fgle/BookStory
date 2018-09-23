@@ -43,10 +43,6 @@
         <servlet-class>web.client.BuyServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>OrderServlet</servlet-name>
-        <servlet-class>web.client.OrderServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>web.client.RegisterServlet</servlet-class>
     </servlet>
@@ -58,17 +54,14 @@
         <servlet-name>LoginOutServlet</servlet-name>
         <servlet-class>web.client.LoginOutServlet</servlet-class>
     </servlet>
-
     <servlet>
-        <servlet-name>ClientOrderServlet</servlet-name>
-        <servlet-class>web.client.ClientOrderServlet</servlet-class>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>web.client.OrderServlet</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>web.client.CartServlet</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>ManagerOrderServlet</servlet-name>
         <servlet-class>web.manager.ManagerOrderServlet</servlet-class>
@@ -99,10 +92,6 @@
         <url-pattern>/client/BuyServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>OrderServlet</servlet-name>
-        <url-pattern>/client/OrderServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/client/RegisterServlet</url-pattern>
     </servlet-mapping>
@@ -115,8 +104,8 @@
         <url-pattern>/client/LoginOutServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ClientOrderServlet</servlet-name>
-        <url-pattern>/client/ClientOrderServlet</url-pattern>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/client/OrderServlet</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

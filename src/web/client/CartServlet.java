@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import domain.Book;
 import domain.Cart;
 import domain.User;
@@ -25,6 +26,8 @@ public class CartServlet extends HttpServlet{
             deleteBooks(request, response);
         } else if("list".equalsIgnoreCase(method)) {
             list(request, response);
+        } else if("order".equalsIgnoreCase(method)) {
+            order(request, response);
         }
     }
     /***列出购物车信息***/
@@ -70,7 +73,7 @@ public class CartServlet extends HttpServlet{
         request.getRequestDispatcher("/client/listcart.jsp").forward(request, response);
 
     }
-
+    /***向购物车中添加一本已有图书***/
     private void add(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String bookID= request.getParameter("bookID");
@@ -84,6 +87,33 @@ public class CartServlet extends HttpServlet{
         request.getSession().setAttribute("cart",cart);
         request.getRequestDispatcher("/client/listcart.jsp").forward(request, response);
 
+    }
+
+    private void order(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try{
+            User user = (User) request.getSession().getAttribute("user");
+            if(user == null){
+                request.setAttribute("message", "对不起，请先登录");
+                request.setAttribute("message", "/client/body.jsp");
+                request.getRequestDispatcher("/message.jsp").forward(request, response);
+                return;
+            }
+
+            Cart cart = (Cart) request.getSession().getAttribute("cart");
+            BusinessServiceImpl service = new BusinessServiceImpl();
+            service.createOrder(cart, user);
+            service.clearCart(cart);//清空购物车
+
+            request.setAttribute("message", "订单已生成");
+            request.setAttribute("path","/client/OrderServlet?method=list&userID=" + user.getId());
+            request.getRequestDispatcher("/message.jsp").forward(request, response);
+        }catch(Exception e){
+            e.printStackTrace();
+            request.setAttribute("message", "订单生成失败");
+            request.setAttribute("path","/client/CartServlet?method=list");
+            request.getRequestDispatcher("/message.jsp").forward(request, response);
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
