@@ -17,7 +17,6 @@ public class CartServlet extends HttpServlet{
             throws ServletException, IOException {
         String method = request.getParameter("method");
 
-        //添加一本图书
         if("add".equalsIgnoreCase(method)) {
             add(request, response);
         }else if("rmOneBook".equalsIgnoreCase(method)) {
@@ -28,7 +27,7 @@ public class CartServlet extends HttpServlet{
             list(request, response);
         }
     }
-
+    /***列出购物车信息***/
     private void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BusinessServiceImpl service = new BusinessServiceImpl();
@@ -43,29 +42,28 @@ public class CartServlet extends HttpServlet{
         request.getSession().setAttribute("cart",cart);
         request.getRequestDispatcher("/client/listcart.jsp").forward(request,response);
     }
-
+    /***删除购物车中一本图书***/
     private void removeOneBook(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
-        String book_id = request.getParameter("bookID");
+        String bookID = request.getParameter("bookID");
         BusinessServiceImpl service = new BusinessServiceImpl();
         Cart cart = (Cart) request.getSession().getAttribute("cart");
-        User user = (User) request.getSession().getAttribute("user");
 
-        Book book = service.findBook(book_id);
+        Book book = service.findBook(bookID);
         service.removeOneBookInCart(cart, book);
 
         request.getSession().setAttribute("cart",cart);
         request.getRequestDispatcher("/client/listcart.jsp").forward(request, response);
 
     }
+    /***删除购物车中某图书***/
     private void deleteBooks(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String book_id = request.getParameter("bookID");
+        String bookID = request.getParameter("bookID");
         BusinessServiceImpl service = new BusinessServiceImpl();
         Cart cart = (Cart) request.getSession().getAttribute("cart");
-        User user = (User) request.getSession().getAttribute("user");
 
-        Book book = service.findBook(book_id);
+        Book book = service.findBook(bookID);
         service.deleteBooksInCart(cart, book);
 
         request.getSession().setAttribute("cart",cart);
@@ -75,12 +73,12 @@ public class CartServlet extends HttpServlet{
 
     private void add(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String book_id = request.getParameter("bookID");
+        String bookID= request.getParameter("bookID");
         BusinessServiceImpl service = new BusinessServiceImpl();
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         User user = (User) request.getSession().getAttribute("user");
 
-        Book book = service.findBook(book_id);
+        Book book = service.findBook(bookID);
         service.buyBook(cart, book, user);
 
         request.getSession().setAttribute("cart",cart);
