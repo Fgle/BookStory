@@ -23,35 +23,27 @@ public class BusinessServiceImpl implements BusinessService {
     private UserDao userDao = DaoFactory.getInstance().createDao("dao.impl.UserDaoImpl", UserDao.class);
     private OrderDao orderDao = DaoFactory.getInstance().createDao("dao.impl.OrderDaoImpl", OrderDao.class);
     private CartDao cartDao = DaoFactory.getInstance().createDao("dao.impl.CartDaoImpl",CartDao.class);
-    /* (non-Javadoc)
-     * @see service.impl.BusinessService#addCategory(domain.Category)
-     */
+//category{
     public void addCategory(Category category){
         categoryDao.add(category);
     }
 
-    /* (non-Javadoc)
-     * @see service.impl.BusinessService#findCategory(java.lang.String)
-     */
     public Category findCategory(String id){
         return categoryDao.find(id);
     }
 
-    /* (non-Javadoc)
-     * @see service.impl.BusinessService#getAllCategory()
-     */
     public List<Category> getAllCategory(){
         return categoryDao.getAll();
     }
 
-    public void updateCategory(Category category) {
-        categoryDao.update(category);
-    }
+    public void updateCategory(Category category) { categoryDao.update(category); }
 
     public void delCategory(String id) {
         categoryDao.delete(id);
     }
+//}
 
+//book{
     //添加书
     public Boolean addBook(Book book){
         Book oldBook = bookDao.findByName(book.getName());
@@ -70,12 +62,14 @@ public class BusinessServiceImpl implements BusinessService {
     //删除书
     public void delBook(Book book) { bookDao.delete(book); }
     public void delBookByID(String id) { bookDao.deleteById(id); }
-    //获得书
+    //查找图书
     public Book findBook(String id){
         return bookDao.findByID(id);
     }
+//}
 
-    //获得分页数据
+//page{
+    //获得所有图书分页数据
     public Page getBookPageData(String pagenum){
         int totalrecord = bookDao.getTotalRecord();
         Page page = null;
@@ -88,7 +82,7 @@ public class BusinessServiceImpl implements BusinessService {
         page.setList(list);
         return page;
     }
-
+    //获得某分类图书的分页数据
     public Page getBookPageData(String pagenum, String category_id){
         int totalrecord = bookDao.getTotalRecord(category_id);
         Page page = null;
@@ -101,7 +95,10 @@ public class BusinessServiceImpl implements BusinessService {
         page.setList(list);
         return page;
     }
-     //购物车
+//}
+
+//cart{
+     //向购物车中添加一本图书
     public void buyBook(Cart cart, Book book, User user) {
         if(cart.getId() == null) {
             cart.setId(WebUtils.makeID());
@@ -110,42 +107,43 @@ public class BusinessServiceImpl implements BusinessService {
         if(cart.getUser() == null) {
             cart.setUser(user);
         }
-        System.out.printf(book.getId());
         cart.add(book);
 
         cartDao.add(cart);
     }
-
+    //查找某用户的购物车
     public Cart findCart(String user_id) {
         return cartDao.find(user_id);
     }
-
+    //清除购物车信息
     public void clearCart(Cart cart) {
         cartDao.clear(cart);
     }
-
+    //删除购物车中的一本书
     public void removeOneBookInCart(Cart cart, Book book) {
         cartDao.removeOne(cart, book);
     }
-
+    //删除购物车中的某本书
     public void deleteBooksInCart(Cart cart, Book book) {
         cartDao.delete(cart, book);
     }
+//}
 
+//user{
     //注册用户
     public void registerUser(User user) {
         userDao.add(user);
     }
-
-    public User findUser(String id){
-        return userDao.find(id);
-    }
+    //查找用户
+    public User findUser(String id){ return userDao.find(id); }
     public User findUserByName(String username) { return userDao.find(username); }
-
+    //用户登录
     public User userLogin(String username, String password){
         return userDao.find(username, password);
     }
+//}
 
+//order{
     //生成订单
     public void createOrder(Cart cart, User user){
         if(cart == null){
@@ -200,4 +198,5 @@ public class BusinessServiceImpl implements BusinessService {
     public void delOrder(Order order) {
         orderDao.delete(order);
     }
+//}
 }
