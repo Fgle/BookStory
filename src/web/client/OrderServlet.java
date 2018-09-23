@@ -26,7 +26,7 @@ public class OrderServlet extends HttpServlet {
         }
 
     }
-
+    /***列出用户订单***/
     private void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userid = request.getParameter("userID");
@@ -35,7 +35,7 @@ public class OrderServlet extends HttpServlet {
         request.setAttribute("orders", orders);
         request.getRequestDispatcher("/client/clientlistorder.jsp").forward(request, response);
     }
-
+    /***订单明细***/
     private void detail(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String orderid = request.getParameter("orderID");
@@ -44,7 +44,7 @@ public class OrderServlet extends HttpServlet {
         request.setAttribute("order", order);
         request.getRequestDispatcher("/client/clientorderdetail.jsp").forward(request, response);
     }
-
+    /***删除用户一个订单***/
     private void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String order_id = request.getParameter("orderID");

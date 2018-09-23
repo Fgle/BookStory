@@ -88,7 +88,7 @@ public class CartServlet extends HttpServlet{
         request.getRequestDispatcher("/client/listcart.jsp").forward(request, response);
 
     }
-
+    /***购买，生成订单***/
     private void order(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
