@@ -29,12 +29,12 @@ public class OrderServlet extends HttpServlet {
             service.clearCart(cart);//清空购物车
 
             request.setAttribute("message", "订单已生成");
-            request.setAttribute("path","/client/ClientListOrderServlet?userid=" + user.getId());
+            request.setAttribute("path","/client/ClientOrderServlet?method=list&userID=" + user.getId());
             request.getRequestDispatcher("/message.jsp").forward(request, response);
         }catch(Exception e){
             e.printStackTrace();
             request.setAttribute("message", "订单生成失败");
-            request.setAttribute("path","/client/ListCartServlet");
+            request.setAttribute("path","/client/CartServlet?method=list");
             request.getRequestDispatcher("/message.jsp").forward(request, response);
         }
     }

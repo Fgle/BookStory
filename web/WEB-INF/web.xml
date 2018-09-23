@@ -60,25 +60,15 @@
     </servlet>
 
     <servlet>
-        <servlet-name>ClientListOrderServlet</servlet-name>
-        <servlet-class>web.client.ClientListOrderServlet</servlet-class>
+        <servlet-name>ClientOrderServlet</servlet-name>
+        <servlet-class>web.client.ClientOrderServlet</servlet-class>
     </servlet>
+
     <servlet>
-        <servlet-name>ClientOrderDetailServlet</servlet-name>
-        <servlet-class>web.client.ClientOrderDetailServlet</servlet-class>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>web.client.CartServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ClientListCartServlet</servlet-name>
-        <servlet-class>web.client.ListCartServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CartBookServlet</servlet-name>
-        <servlet-class>web.client.CartBookServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DelOrderServlet</servlet-name>
-        <servlet-class>web.client.DelOrderServlet</servlet-class>
-    </servlet>
+
     <servlet>
         <servlet-name>ManagerOrderServlet</servlet-name>
         <servlet-class>web.manager.ManagerOrderServlet</servlet-class>
@@ -125,25 +115,15 @@
         <url-pattern>/client/LoginOutServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ClientListOrderServlet</servlet-name>
-        <url-pattern>/client/ClientListOrderServlet</url-pattern>
+        <servlet-name>ClientOrderServlet</servlet-name>
+        <url-pattern>/client/ClientOrderServlet</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
-        <servlet-name>ClientOrderDetailServlet</servlet-name>
-        <url-pattern>/client/ClientOrderDetailServlet</url-pattern>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/client/CartServlet</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ClientListCartServlet</servlet-name>
-        <url-pattern>/client/ListCartServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CartBookServlet</servlet-name>
-        <url-pattern>/client/CartBookServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DelOrderServlet</servlet-name>
-        <url-pattern>/client/DelOrderServlet</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>ManagerOrderServlet</servlet-name>
         <url-pattern>/manage/ManagerOrderServlet</url-pattern>

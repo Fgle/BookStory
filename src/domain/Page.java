@@ -17,7 +17,7 @@ public class Page {
         this.pagenum = pagenum;
         this.totalrecord = totalrecord;
         //算出总页数
-        this.totalpage = (this.totalrecord + this.pagesize - 1) / this.pagesize;
+        this.totalpage = (this.totalrecord + this.pagesize - 1) / this.pagesize;//向上取整
         //算出用户想看的页的数据从数据库哪个地方开始取
         this.startindex = (this.pagenum - 1) * this.pagesize;
 

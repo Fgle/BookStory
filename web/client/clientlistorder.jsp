@@ -32,8 +32,8 @@
             <td>${order.price }</td>
             <td>${order.state==true?'已发货':'未发货' }</td>
             <td>
-                <a href="${pageContext.request.contextPath }/client/ClientOrderDetailServlet?orderid=${order.id}">查看明细</a>
-                <a href="${pageContext.request.contextPath }/client/DelOrderServlet?order_id=${order.id}">删除</a>
+                <a href="${pageContext.request.contextPath }/client/ClientOrderServlet?method=detail&orderID=${order.id}">查看明细</a>
+                <a href="${pageContext.request.contextPath }/client/ClientOrderServlet?method=del&orderID=${order.id}">删除</a>
             </td>
         </tr>
     </c:forEach>

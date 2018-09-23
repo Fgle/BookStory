@@ -19,8 +19,8 @@
 <br/>
 <div>
     <a href="${pageContext.request.contextPath }/client/IndexServlet?method=getAll" target="body">首页</a>
-    <a href="${pageContext.request.contextPath }/client/ListCartServlet" target="body">查看购物车</a>
-    <a href="${pageContext.request.contextPath }/client/ClientListOrderServlet?userid=${user.id}" target="body">查看订单</a>
+    <a href="${pageContext.request.contextPath }/client/CartServlet?method=list" target="body">查看购物车</a>
+    <a href="${pageContext.request.contextPath }/client/ClientOrderServlet?method=list&userID=${user.id}" target="body">查看订单</a>
 </div>
 <div style="float:right;">
     <c:if test="${user==null }">
