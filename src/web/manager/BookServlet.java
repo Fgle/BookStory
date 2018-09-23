@@ -13,14 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import domain.Book;
 import domain.Category;
 import domain.Page;
-import org.omg.PortableInterceptor.INACTIVE;
 import service.impl.BusinessServiceImpl;
 import utils.WebUtils;
 
@@ -31,18 +29,15 @@ public class BookServlet extends HttpServlet {
         String method = request.getParameter("method");
         if ("addUI".equalsIgnoreCase(method)) {
             addUI(request, response);
-        }
-        if ("add".equalsIgnoreCase(method)) {
+        }else if ("add".equalsIgnoreCase(method)) {
             add(request, response);
-        }
-        if("list".equalsIgnoreCase(method)){
+        }else if("list".equalsIgnoreCase(method)) {
             list(request, response);
-        }
-        if("delete".equalsIgnoreCase(method))
+        }else if("delete".equalsIgnoreCase(method)) {
             delete(request, response);
-        if("reviseUI".equalsIgnoreCase(method))
+        }else if("reviseUI".equalsIgnoreCase(method)) {
             reviseUI(request, response);
-        if("revise".equalsIgnoreCase(method))
+        }else if("revise".equalsIgnoreCase(method))
             revise(request, response);
     }
 

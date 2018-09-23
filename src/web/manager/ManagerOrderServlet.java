@@ -15,13 +15,13 @@ public class ManagerOrderServlet extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         String method = request.getParameter("method");
-        if("list".equalsIgnoreCase(method))
+        if("list".equalsIgnoreCase(method)) {
             list(request, response);
-        if("del".equalsIgnoreCase(method))
+        }else if("del".equalsIgnoreCase(method)) {
             delete(request, response);
-        if("detail".equalsIgnoreCase(method))
+        }else if("detail".equalsIgnoreCase(method)) {
             detail(request, response);
-        if("confirm".equalsIgnoreCase(method))
+        }else if("confirm".equalsIgnoreCase(method))
             confirm(request, response);
     }
 
@@ -32,7 +32,6 @@ public class ManagerOrderServlet extends HttpServlet{
         List<Order> orders = service.listOrder(state);
         request.setAttribute("orders", orders);
         request.getRequestDispatcher("/manage/listorder.jsp").forward(request, response);
-        return;
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response)
@@ -45,7 +44,6 @@ public class ManagerOrderServlet extends HttpServlet{
         List<Order> orders = service.listOrder(state);
         request.setAttribute("orders", orders);
         request.getRequestDispatcher("/manage/listorder.jsp").forward(request, response);
-        return;
     }
 
     private void detail(HttpServletRequest request, HttpServletResponse response)
