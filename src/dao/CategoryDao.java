@@ -6,15 +6,15 @@ import domain.Category;
 
 public interface CategoryDao {
 
-    public abstract void add(Category category);
+    void add(Category category);//添加分类
 
-    public abstract Category find(String id);
+    Category find(String id);//查找分类
 
-    public abstract List<Category> getAll();
+    List<Category> getAll();//查看所有分类
 
-    public abstract void update(Category category);
+    void update(Category category);//更新分类信息
 
-    public abstract void delete(String id);
+    void delete(String id);//删除分类
 
 
 }

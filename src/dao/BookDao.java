@@ -6,24 +6,23 @@ import domain.Book;
 
 public interface BookDao {
 
-    void add(Book book);
+    void add(Book book);//添加图书
 
+    /***查找图书***/
     Book findByID(String id);
-
     Book findByName(String name);
 
     void update(Book book);//通过bookID更新图书信息
+    /***删除图书***/
+    void delete(Book book);
+    void deleteById(String id);
 
-    public List<Book> getPageData(int startindex, int pagesize);
+    List<Book> getPageData(int startindex, int pagesize);//查询某页图书
 
-    public int getTotalRecord();
+    int getTotalRecord();//查询图书总数量
 
-    public List<Book> getPageData(int startindex, int pagesize, String category_id);
+    List<Book> getPageData(int startindex, int pagesize, String category_id);//查询某分类下某页图书
 
-    public int getTotalRecord(String category_id);
-
-    public void delete(Book book);
-
-    public void deleteById(String id);
+    int getTotalRecord(String category_id);//查询某类图书数量
 
 }
