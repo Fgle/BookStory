@@ -59,7 +59,7 @@
     <a href="${pageContext.request.contextPath}/manage/ManagerOrderServlet?method=del&orderID=${order.id}&state=${order.state}">确认配送</a>
 </c:if>
 <c:if test="${order.state == false}">
-    <a href="${pageContext.request.contextPath }/manage/ManagerOrderServlet?method=confirm&orderid=${order.id}">确认发货</a>
+    <a href="${pageContext.request.contextPath }/manage/ManagerOrderServlet?method=confirm&orderID=${order.id}">确认发货</a>
 </c:if>
 </body>
 </html>

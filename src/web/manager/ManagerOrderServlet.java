@@ -48,9 +48,9 @@ public class ManagerOrderServlet extends HttpServlet{
 
     private void detail(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
-        String orderid = request.getParameter("orderID");
+        String orderID = request.getParameter("orderID");
         BusinessServiceImpl service = new BusinessServiceImpl();
-        Order order = service.findOrder(orderid);
+        Order order = service.findOrder(orderID);
         request.setAttribute("order", order);
         request.getRequestDispatcher("/manage/orderdetail.jsp").forward(request, response);
     }
@@ -58,9 +58,9 @@ public class ManagerOrderServlet extends HttpServlet{
     private void confirm(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
         try{
-            String orderid = request.getParameter("orderid");
+            String orderID = request.getParameter("orderID");
             BusinessServiceImpl service = new BusinessServiceImpl();
-            service.confirmOrder(orderid);
+            service.confirmOrder(orderID);
             request.setAttribute("message", "订单已置为发货状态，请及时配送");
             request.getRequestDispatcher("/message.jsp").forward(request, response);
         } catch(Exception e){
